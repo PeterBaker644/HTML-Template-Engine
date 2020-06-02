@@ -83,9 +83,7 @@ const engineerQuery = [
         type: "input",
         message: "Enter the id of the new employee.",
         name: "id",
-        validate: (input) => {
-            !Number(input) ? "You must provide a valid id number." : true;
-        }
+        validate: (input) => !Number(input) ? "You must provide a valid id number." : true
         // Validate for existing id numbers. Can use string or use the employees object array.
     },
     {
@@ -114,9 +112,7 @@ const internQuery = [
         type: "input",
         message: "Enter the id of the new employee.",
         name: "id",
-        validate: (input) => {
-            !Number(input) ? "You must provide a valid id number." : true;
-        }
+        validate: (input) => !Number(input) ? "You must provide a valid id number." : true
         // Validate for existing id numbers. Can use string or use the employees object array.
     },
     {
@@ -139,9 +135,32 @@ function userPrompt(prompt) {return inquirer.prompt(prompt);}
 async function generateTeamPrompt() {
     try {
         console.log("This is a welcome statement");
-        const manager = await userPrompt(managerQuery)
+        const manager = await userPrompt(managerQuery);
         employees.push(new Manager(...Object.values(manager)));
-        console.log(employees[0].getName())
+
+        for (employee of employees) {
+            let { choice } = await userPrompt(choicesQuery);
+            console.log(choice);
+            switch (choice) {
+                case "addEngineer":
+                    let engineer = await userPrompt(engineerQuery);
+                    employees.push(new Engineer(...Object.values(engineer)));
+                    break;
+                case "addIntern":
+                    let intern = await userPrompt(internQuery);
+                    employees.push(new Intern(...Object.values(intern)));
+                    break;
+                case "finish":
+                    console.log(employees);
+                    console.log("Wooooo you did it!")
+                    break;
+                case "abort":
+                    console.log("Application terminated by the user");
+                    return;
+            } 
+        }
+
+        console.log ("This will only print if the loop is exited")
     } catch(err) {
         console.log(err);
     }
