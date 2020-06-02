@@ -8,12 +8,29 @@ b. Assign an Intern
 c. Complete team member entry and generate HTML page.
 d. Exit application without generating page.  
 
+
 Manager: (name, id, email, officeNumber)
-
 Engineer: (name, id, email, github(username))
-
 Intern: (name, id, email, school)
 
 There should be an prompt array for Manager, Engineer, and Intern that can all be called separately.
 
 After each prompt, take the information returned by inquirer and create an employee object with the coresponding class which will be added to the "employees" array which will be then passed to the render function.
+
+
+for (employee in employees) {
+    let choice = choices prompt 
+    switch (choice) {
+        case: engineer
+            const engineer = await userPrompt
+        case: intern
+        case: finish
+
+        case: abort
+            Don't know what to do here
+    } while {}
+}
+
+for (x in array) {
+    
+}
