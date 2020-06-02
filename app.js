@@ -11,6 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 // Maybe something like this? Or do we just check through objects?
 // const employeeIds = [];
+const employees = [];
 
 const choicesQuery = [
     {
@@ -53,9 +54,7 @@ const managerQuery = [
         type: "input",
         message: "Enter the id of your team manager",
         name: "id",
-        validate: (input) => {
-            !Number(input) ? "You must provide a valid id number." : true;
-        }
+        validate: (input) => !Number(input) ? "You must provide a valid id number." : true
         // Validate for existing id numbers. Can use string or use the employees object array.
     },
     {
@@ -69,9 +68,7 @@ const managerQuery = [
         type: "input",
         message: "Enter the office number of your team manager",
         name: "officeNumber",
-        validate: (input) => {
-            !Number(input) ? "You must provide a valid office number." : true;
-        }
+        validate: (input) => !Number(input) ? "You must provide a valid office number." : true
     }
 ];
 
@@ -137,9 +134,21 @@ const internQuery = [
     }
 ];
 
-function generateTeamPrompt() {
+function userPrompt(prompt) {return inquirer.prompt(prompt);}
 
+async function generateTeamPrompt() {
+    try {
+        console.log("This is a welcome statement");
+        const manager = await userPrompt(managerQuery)
+        employees.push(new Manager(...Object.values(manager)));
+        console.log(employees[0].getName())
+    } catch(err) {
+        console.log(err);
+    }
 }
+
+generateTeamPrompt();
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
