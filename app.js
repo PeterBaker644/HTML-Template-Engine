@@ -44,7 +44,6 @@ const choicesQuery = [
         ]
     }
 ];
-
 const managerQuery = [
     {
         type: "input",
@@ -73,7 +72,6 @@ const managerQuery = [
         validate: (input) => !Number(input) ? "You must provide a valid office number." : true
     }
 ];
-
 const engineerQuery = [
     {
         type: "input",
@@ -102,7 +100,6 @@ const engineerQuery = [
         validate: (input) => (!input) ? "You must provide a github username." : true
     }
 ];
-
 const internQuery = [
     {
         type: "input",
@@ -139,20 +136,20 @@ async function generateTeam() {
         console.log("\nThis is a welcome statement\n");
         const manager = await userPrompt(managerQuery);
         employees.push(new Manager(...Object.values(manager)));
-        console.log("")
+        console.log("");
         for (employee of employees) {
             let { choice } = await userPrompt(choicesQuery);
-            console.log("")
+            console.log("");
             switch (choice) {
                 case "addEngineer":
                     let engineer = await userPrompt(engineerQuery);
                     employees.push(new Engineer(...Object.values(engineer)));
-                    console.log("")
+                    console.log("");
                     break;
                 case "addIntern":
                     let intern = await userPrompt(internQuery);
                     employees.push(new Intern(...Object.values(intern)));
-                    console.log("")
+                    console.log("");
                     break;
                 case "finish":
                     console.log("Employee entry successfully completed")

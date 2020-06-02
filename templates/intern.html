@@ -1,10 +1,11 @@
-<div class="card employee-card">
-    <div class="card-header">
-        <h2 class="card-title">{{ name }}</h2>
-        <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>{{ role }}</h3>
+<div class="card employee-card my-3 mx-3" style="width:320px">
+    <div class="card-header bg-primary text-white">
+        <h2 class="card-title text-center font-weight-normal">{{ name }}</h2>
+        <hr>
+        <h5 class="card-subtitle text-center lead"><i class="fas fa-user-graduate mr-2 small"></i>{{ role }}</h5>
     </div>
-    <div class="card-body">
-        <ul class="list-group">
+    <div class="card-body d-flex align-items-center" style="background-color: #f7fbff">
+        <ul class="list-group w-100">
             <li class="list-group-item">ID: {{ id }}</li>
             <li class="list-group-item">Email: <a href="mailto:{{ email }}">{{ email }}</a></li>
             <li class="list-group-item">School: {{ school }}</li>
