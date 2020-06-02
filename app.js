@@ -14,6 +14,7 @@ const render = require("./lib/htmlRenderer");
 // Maybe something like this? Or do we just check through objects?
 // const employeeIds = [];
 const employees = [];
+const ids = [];
 
 const choicesQuery = [
     {
@@ -55,7 +56,7 @@ const managerQuery = [
         type: "input",
         message: "Enter the id of your team manager",
         name: "id",
-        validate: (input) => !Number(input) ? "You must provide a valid id number." : true
+        validate: (input) => (!Number(input) || ids.includes(Number(input))) ? "You must provide a new and valid id number." : true
         // Validate for existing id numbers. Can use string or use the employees object array.
     },
     {
@@ -83,7 +84,7 @@ const engineerQuery = [
         type: "input",
         message: "Enter the id of the new employee.",
         name: "id",
-        validate: (input) => !Number(input) ? "You must provide a valid id number." : true
+        validate: (input) => (!Number(input) || ids.includes(Number(input))) ? "You must provide a new and valid id number." : true
         // Validate for existing id numbers. Can use string or use the employees object array.
     },
     {
@@ -111,7 +112,7 @@ const internQuery = [
         type: "input",
         message: "Enter the id of the new employee.",
         name: "id",
-        validate: (input) => !Number(input) ? "You must provide a valid id number." : true
+        validate: (input) => (!Number(input) || ids.includes(Number(input))) ? "You must provide a new and valid id number." : true
         // Validate for existing id numbers. Can use string or use the employees object array.
     },
     {
@@ -134,8 +135,10 @@ function userPrompt(prompt) {return inquirer.prompt(prompt);}
 async function generateTeam() {
     try {
         console.log("\nThis is a welcome statement\n");
-        const manager = await userPrompt(managerQuery);
+        let manager = await userPrompt(managerQuery);
+        ids.push(Number(manager.id));
         employees.push(new Manager(...Object.values(manager)));
+        console.log(ids);
         console.log("");
         for (employee of employees) {
             let { choice } = await userPrompt(choicesQuery);
@@ -143,22 +146,27 @@ async function generateTeam() {
             switch (choice) {
                 case "addEngineer":
                     let engineer = await userPrompt(engineerQuery);
+                    ids.push(Number(engineer.id));
                     employees.push(new Engineer(...Object.values(engineer)));
+                    console.log(ids);
                     console.log("");
                     break;
                 case "addIntern":
                     let intern = await userPrompt(internQuery);
+                    ids.push(Number(intern.id));
                     employees.push(new Intern(...Object.values(intern)));
+                    console.log(ids);
                     console.log("");
                     break;
                 case "finish":
-                    console.log("Employee entry successfully completed")
+                    console.log("Employee entry successfully completed");
                     break;
                 case "abort":
                     console.log("Application terminated by the user");
                     return;
             } 
         }
+        employees.sort((a, b) => a.id - b.id);
         const htmlString = render(employees);
         await writeFileAsync(outputPath, htmlString);
         console.log(`\nYour document, team.html has been successfully generated!`)
