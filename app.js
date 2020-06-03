@@ -25,23 +25,23 @@ const choicesQuery = [
             {
                 name: "Assign an engineer to the team",
                 value: "addEngineer",
-                short: "Assign Engineer",
+                short: "Assign Engineer"
             },
             {
                 name: "Assign an intern to the team",
                 value: "addIntern",
-                short: "Assign Intern",
+                short: "Assign Intern"
             },
             {
                 name: "Complete team member entry and generate HTML page",
                 value: "finish",
-                short: "Generate HTML",
+                short: "Generate HTML"
             },
             {
                 name: "Exit application without generating page.",
                 value: "abort",
-                short: "Exit Application",
-            },
+                short: "Exit Application"
+            }
         ]
     }
 ];
@@ -63,7 +63,7 @@ const managerQuery = [
         type: "input",
         message: "Enter the team manager's email address.",
         name: "email",
-        //Add regex validation.
+        //Add regex validation. ^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$
         validate: (input) => (!input) ? "You must provide a valid email address." : true
     },
     {
@@ -138,7 +138,6 @@ async function generateTeam() {
         let manager = await userPrompt(managerQuery);
         ids.push(Number(manager.id));
         employees.push(new Manager(...Object.values(manager)));
-        console.log(ids);
         console.log("");
         for (employee of employees) {
             let { choice } = await userPrompt(choicesQuery);
@@ -148,14 +147,12 @@ async function generateTeam() {
                     let engineer = await userPrompt(engineerQuery);
                     ids.push(Number(engineer.id));
                     employees.push(new Engineer(...Object.values(engineer)));
-                    console.log(ids);
                     console.log("");
                     break;
                 case "addIntern":
                     let intern = await userPrompt(internQuery);
                     ids.push(Number(intern.id));
                     employees.push(new Intern(...Object.values(intern)));
-                    console.log(ids);
                     console.log("");
                     break;
                 case "finish":
@@ -167,6 +164,7 @@ async function generateTeam() {
             } 
         }
         employees.sort((a, b) => a.id - b.id);
+        console.log(employees);
         const htmlString = render(employees);
         await writeFileAsync(outputPath, htmlString);
         console.log(`\nYour document, team.html has been successfully generated!`)
