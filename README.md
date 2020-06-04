@@ -10,13 +10,22 @@ A Node CLI that takes in information about employees and generates an HTML webpa
 ## Table of Contents
 * Title
 * Description
+* [User Story](#user-story)
 * [Installation](#installation)
 * [Usage](#usage)
 * [License](#license)
 * [Contributing](#contributing)
 * [Testing](#testing)
+* [Screenshots](#screenshots)
 
 </details>
+
+## User Story
+```
+As a manager
+I want to generate a webpage that displays my team's basic info
+so that I have quick access to emails and GitHub profiles
+```
 
 ## Installation
 After cloning the repository to your computer, navigate to the `HTML-Template-Engine` folder with your terminal and run `npm install`.
@@ -34,3 +43,9 @@ Please note that this project is released with a Contributor Code of Conduct. By
 You can run the tests at any time with `npm run test`.
 
 ## Screenshots
+
+![Screenshot of the CLI](https://raw.githubusercontent.com/PeterBaker644/HTML-Template-Engine/master/screenshots/screenshot-1.png)
+
+![Screenshot of the Generated Website](https://raw.githubusercontent.com/PeterBaker644/HTML-Template-Engine/master/screenshots/screenshot-2.png)
+
+![Screenshot of the Tests Passing](https://raw.githubusercontent.com/PeterBaker644/HTML-Template-Engine/master/screenshots/screenshot-3.png)
