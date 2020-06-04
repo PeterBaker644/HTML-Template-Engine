@@ -151,7 +151,7 @@ The HTML file is created in the output folder.\n`
                     console.log("");
                     break;
                 case "finish":
-                    console.log("Employee entry successfully completed");
+                    console.log("Employee entry successfully completed.");
                     break;
                 case "abort":
                     console.log("Application terminated by the user.");
