@@ -36,7 +36,7 @@ const choicesQuery = [
                 short: "Generate HTML"
             },
             {
-                name: "Exit application without generating page.",
+                name: "Exit application without generating page",
                 value: "abort",
                 short: "Exit Application"
             }
@@ -53,20 +53,20 @@ const managerQuery = [
         type: "input",
         message: "Enter the id of your team manager",
         name: "id",
-        validate: (input) => (!Number(input) || ids.includes(Number(input))) ? "You must provide a new and valid id number." : true
+        validate: (input) => (!Number(input) || ids.includes(Number(input))) ? "You must provide a new and valid id number" : true
     },
     {
         type: "input",
-        message: "Enter the team manager's email address.",
+        message: "Enter the team manager's email address",
         name: "email",
         //If I were to add regex validation: ^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$ ultimately I decided not to. 
-        validate: (input) => (!input) ? "You must provide a valid email address." : true
+        validate: (input) => (!input) ? "You must provide a valid email address" : true
     },
     {
         type: "input",
         message: "Enter the office number of your team manager",
         name: "officeNumber",
-        validate: (input) => !Number(input) ? "You must provide a valid office number." : true
+        validate: (input) => !Number(input) ? "You must provide a valid office number" : true
     }
 ];
 const engineerQuery = [
@@ -77,22 +77,22 @@ const engineerQuery = [
     },
     {
         type: "input",
-        message: "Enter the id of the new employee.",
+        message: "Enter the id of the new employee",
         name: "id",
         validate: (input) => (!Number(input) || ids.includes(Number(input))) ? "You must provide a new and valid id number." : true
 
     },
     {
         type: "input",
-        message: "Enter the employee's email address.",
+        message: "Enter the employee's email address",
         name: "email",
-        validate: (input) => (!input) ? "You must provide a valid email address." : true
+        validate: (input) => (!input) ? "You must provide a valid email address" : true
     },
     {
         type: "input",
-        message: "Enter the new engineer's github username.",
+        message: "Enter the new engineer's github username",
         name: "github",
-        validate: (input) => (!input) ? "You must provide a github username." : true
+        validate: (input) => (!input) ? "You must provide a github username" : true
     }
 ];
 const internQuery = [
@@ -103,21 +103,21 @@ const internQuery = [
     },
     {
         type: "input",
-        message: "Enter the id of the new employee.",
+        message: "Enter the id of the new employee",
         name: "id",
-        validate: (input) => (!Number(input) || ids.includes(Number(input))) ? "You must provide a new and valid id number." : true
+        validate: (input) => (!Number(input) || ids.includes(Number(input))) ? "You must provide a new and valid id number" : true
     },
     {
         type: "input",
-        message: "Enter the employee's email address.",
+        message: "Enter the employee's email address",
         name: "email",
-        validate: (input) => (!input) ? "You must provide a valid email address." : true
+        validate: (input) => (!input) ? "You must provide a valid email address" : true
     },
     {
         type: "input",
         message: "What school will/did the new intern graduate from?",
         name: "school",
-        validate: (input) => (!input) ? "You must provide a school." : true
+        validate: (input) => (!input) ? "You must provide a school" : true
     }
 ];
 
