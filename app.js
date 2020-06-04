@@ -5,17 +5,15 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 const util = require("util");
-const writeFileAsync = util.promisify(fs.writeFile);
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
+const writeFileAsync = util.promisify(fs.writeFile);
 const render = require("./lib/htmlRenderer");
-// Maybe something like this? Or do we just check through objects?
-// const employeeIds = [];
+
 const employees = [];
 const ids = [];
-
 const choicesQuery = [
     {
         type: "list",
@@ -50,20 +48,18 @@ const managerQuery = [
         type: "input",
         message: "Enter the full name of your new team manager",
         name: "name"
-        // regex validation?
     },
     {
         type: "input",
         message: "Enter the id of your team manager",
         name: "id",
         validate: (input) => (!Number(input) || ids.includes(Number(input))) ? "You must provide a new and valid id number." : true
-        // Validate for existing id numbers. Can use string or use the employees object array.
     },
     {
         type: "input",
         message: "Enter the team manager's email address.",
         name: "email",
-        //Add regex validation. ^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$
+        //If I were to add regex validation: ^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,63}$ ultimately I decided not to. 
         validate: (input) => (!input) ? "You must provide a valid email address." : true
     },
     {
@@ -78,20 +74,18 @@ const engineerQuery = [
         type: "input",
         message: "Enter the full name of your new engineer",
         name: "name"
-        // regex validation?
     },
     {
         type: "input",
         message: "Enter the id of the new employee.",
         name: "id",
         validate: (input) => (!Number(input) || ids.includes(Number(input))) ? "You must provide a new and valid id number." : true
-        // Validate for existing id numbers. Can use string or use the employees object array.
+
     },
     {
         type: "input",
         message: "Enter the employee's email address.",
         name: "email",
-        //Add regex validation.
         validate: (input) => (!input) ? "You must provide a valid email address." : true
     },
     {
@@ -106,20 +100,17 @@ const internQuery = [
         type: "input",
         message: "Enter the full name of your new intern",
         name: "name"
-        // regex validation?
     },
     {
         type: "input",
         message: "Enter the id of the new employee.",
         name: "id",
         validate: (input) => (!Number(input) || ids.includes(Number(input))) ? "You must provide a new and valid id number." : true
-        // Validate for existing id numbers. Can use string or use the employees object array.
     },
     {
         type: "input",
         message: "Enter the employee's email address.",
         name: "email",
-        //Add regex validation.
         validate: (input) => (!input) ? "You must provide a valid email address." : true
     },
     {
@@ -134,7 +125,11 @@ function userPrompt(prompt) {return inquirer.prompt(prompt);}
 
 async function generateTeam() {
     try {
-        console.log("\nThis is a welcome statement\n");
+        console.log(
+            `\nWelcome to the automated html staff contact page generator!
+            Please enter staff information as accurately as possible - all fields are required. 
+            HTML file is created in the output folder.\n`
+        );
         let manager = await userPrompt(managerQuery);
         ids.push(Number(manager.id));
         employees.push(new Manager(...Object.values(manager)));
@@ -164,7 +159,6 @@ async function generateTeam() {
             } 
         }
         employees.sort((a, b) => a.id - b.id);
-        console.log(employees);
         const htmlString = render(employees);
         await writeFileAsync(outputPath, htmlString);
         console.log(`\nYour document, team.html has been successfully generated!`)
