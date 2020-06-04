@@ -126,9 +126,9 @@ function userPrompt(prompt) {return inquirer.prompt(prompt);}
 async function generateTeam() {
     try {
         console.log(
-            `\nWelcome to the automated html staff contact page generator!
-            Please enter staff information as accurately as possible - all fields are required. 
-            HTML file is created in the output folder.\n`
+            `\nWelcome to the automated html staff contact page generator! 
+Please enter staff information as accurately as possible - all fields are required. 
+The HTML file is created in the output folder.\n`
         );
         let manager = await userPrompt(managerQuery);
         ids.push(Number(manager.id));
@@ -154,7 +154,7 @@ async function generateTeam() {
                     console.log("Employee entry successfully completed");
                     break;
                 case "abort":
-                    console.log("Application terminated by the user");
+                    console.log("Application terminated by the user.");
                     return;
             } 
         }
